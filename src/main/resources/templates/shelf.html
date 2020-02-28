@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Shelf</title>
+
+    <link href="./css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link href="./css/dashboard.css" th:href="@{css/dashboard.css}" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="base :: sidebar"></nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Shelf</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <form th:action="@{/shelf/createShelfForm}" method="get">
+                            <button class="btn btn-sm btn-outline-secondary">Create Shelf</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2" th:if="${shelfNotExist}">
+                <div class="alert alert-danger" role="alert">
+                    Error! Shelf does not exist
+                </div>
+            </div>
+
+            <div class="row mb-2" th:if="${successfullyAddedChanges}">
+                <div class="alert alert-success" role="alert">
+                    Successfully added changes to the database
+                </div>
+            </div>
+
+
+            <h2>List Shelf</h2>
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="shelf:${shelfList}">
+                        <th scope="row" th:text="${shelf.shelfId}"></th>
+                        <td th:text="${shelf.code}"></td>
+
+                        <td>
+                            <div class="btn-group mr-2">
+                                <a class="btn btn-sm btn-outline-secondary mr-2"
+                                   th:href="@{/shelf/{id}/delete(id=${shelf.shelfId})}"
+                                   onclick="return confirm('Are you sure?')">Delete</a>
+                                <a class="btn btn-sm btn-outline-secondary"
+                                   th:href="@{/shelf/{id}/editForm(id=${shelf.shelfId})}">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <footer th:replace="base :: footer"></footer>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Member</title>
+
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" th:href="@{https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css" th:href="@{https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css}" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="base :: sidebar"></nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Create Member</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <form th:action="@{/member}" method="get">
+                            <button class="btn btn-sm btn-outline-secondary">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2" th:if="${memberExist}">
+                <div class="alert alert-danger" role="alert">
+                    Member exists
+                </div>
+            </div>
+
+            <form th:action="@{/member}" th:object="${createMemberForm}" method="post" class="needs-validation">
+
+                <div class="mb-3">
+                    <label for="username">Name</label>
+                    <input type="text" class="form-control" th:field="*{username}" id="username">
+                    <div class="alert alert-danger mt-3" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Please enter username</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <input rows="3" class="form-control" th:field="*{password}" id="password"><
+                    <div class="alert alert-danger mt-3" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Please enter password</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status">Status</label>
+                    <select id = "status" th:field="*{status}">
+                        <option value = "true">Active</option>
+                        <option value = "false">De-active</option>
+                    </select>
+                    <div class="alert alert-danger mt-3" role="alert" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Please select status</div>
+                </div>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Create</button>
+            </form>
+
+
+
+            <footer th:replace="base :: footer"></footer>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

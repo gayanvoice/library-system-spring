@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Home</title>
+
+    <link href="./css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="d-flex flex-column h-100">
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <h1 class="mt-5">Library Management System</h1>
+        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
+        <p>Go to <a href="/library/login">Login</a></p>
+        <p>Go to <a href="/library/signup">Sign up</a></p>
+        <p>Go to <a href="/library/dashboard">Dashboard</a></p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+    <form th:action="@{/doLogout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+</body>
+</html>
